@@ -22,4 +22,12 @@ public class PageResult implements Serializable {
     public void setRows(List rows) {
         this.rows = rows;
     }
+
+    public PageResult(Long total, List rows) {
+        this.total = total;
+        this.rows = rows;
+    }
+
+    public PageResult() {
+    }
 }

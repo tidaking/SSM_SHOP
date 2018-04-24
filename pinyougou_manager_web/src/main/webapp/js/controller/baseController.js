@@ -22,7 +22,7 @@ app.controller("baseController",function ($scope) {
             $scope.selectIds.push(id)
         }else{
             var idx = $scope.selectIds.indexOf(id);
-            $scope.selectIds.splice(idx)
+            $scope.selectIds.splice(idx,1)
         }
     }
 
