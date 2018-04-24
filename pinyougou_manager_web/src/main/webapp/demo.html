@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>angular测试</title>
+	<script type="application/javascript" src="plugins/angularjs/angular.js"></script>
+
+	<script type="application/javascript">
+        var app = angular.module("myApp",[])
+
+        app.controller("myController",function ($scope,$http) {
+            $scope.findAll = function () {
+                $http.get('data.json').success(
+                    function (response) {
+                        $scope.list = response
+                    }
+                )
+            }
+        })
+	</script>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+<table>
+	<tr>
+		<td>姓名</td>
+		<td>年龄</td>
+		<td>语文</td>
+		<td>数学</td>
+		<td>历史</td>
+	</tr>
+	<tr ng-repeat="item in list">
+		<td>{{item.name}}</td>
+		<td>{{item.age}}</td>
+		<td>{{item.yuwen}}</td>
+		<td>{{item.shuxue}}</td>
+		<td>{{item.lishi}}</td>
+	</tr>
+
+</table>
+<br>
+<input type="button" value="查询" ng-click="findAll()">
+</body>
+
+</html>
