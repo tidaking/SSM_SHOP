@@ -13,7 +13,7 @@
     <dubbo:registry protocol="zookeeper" address="192.168.25.128" port="2181"></dubbo:registry>
     <!--引用服务 通过注解 @reference 扫描 即可引用 包含了组件扫描-->
     <!--dubbo:annotation能替代掉component-scan:但为何?-->
-    <dubbo:annotation package="com.robin.shopweb.controller"></dubbo:annotation>
+    <dubbo:annotation package="com.robin.shop.controller"></dubbo:annotation>
 
 
     <!-- 使用最新版的HandlerMapper/HandlerAdator,以及支持json -->
