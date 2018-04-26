@@ -3,9 +3,13 @@ package com.robin.mapper;
 import com.robin.pojo.TbBrand;
 import com.robin.pojo.TbBrandExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TbBrandMapper {
+    List<Map> selectOptionList();
+
     int countByExample(TbBrandExample example);
 
     int deleteByExample(TbBrandExample example);

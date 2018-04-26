@@ -3,9 +3,13 @@ package com.robin.mapper;
 import com.robin.pojo.TbSpecification;
 import com.robin.pojo.TbSpecificationExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TbSpecificationMapper {
+    List<Map> selectOptionList();
+
     int countByExample(TbSpecificationExample example);
 
     int deleteByExample(TbSpecificationExample example);

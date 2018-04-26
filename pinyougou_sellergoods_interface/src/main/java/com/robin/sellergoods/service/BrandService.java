@@ -4,8 +4,11 @@ import com.robin.pojo.TbBrand;
 import entity.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BrandService {
+
+    public List<Map> selectOptionList();
 
     public List<TbBrand> findAll();
 

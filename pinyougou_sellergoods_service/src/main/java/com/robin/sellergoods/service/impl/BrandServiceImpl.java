@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -20,6 +21,11 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private TbBrandMapper tbBrandMapper;
+
+    public List<Map> selectOptionList() {
+        return tbBrandMapper.selectOptionList();
+    }
+
 
     @Override
     public List<TbBrand> findAll() {
