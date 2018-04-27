@@ -2,8 +2,18 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!--配置应用名 服务消费方-->
+    <dubbo:application name="pinyougou-shop-web"></dubbo:application>
+    <!--配置注册中心-->
+    <dubbo:registry protocol="zookeeper" address="192.168.25.128" port="2181"></dubbo:registry>
+    <dubbo:reference interface="com.robin.sellergoods.service.SellerService" id="sellerService"></dubbo:reference>
+    <!--<dubbo:annotation package="com.robin.shop.service"></dubbo:annotation>-->
+
 
     <!--授权(authorities)和认证(aunthentication)-->
     <http pattern="/shoplogin.html" security="none"></http>
@@ -17,13 +27,15 @@
     <http use-expressions="false">
         <!--拦截所有的请求，只有拥有ROLE_ADMIN的角色的人可以访问-->
         <intercept-url pattern="/favicon.ico" access="IS_AUTHENTICATED_ANONYMOUSLY"></intercept-url>
-        <intercept-url pattern="/**" access="ROLE_ADMIN"></intercept-url>
+        <intercept-url pattern="/**" access="ROLE_SELLER"></intercept-url>
         <!--httpbasic 登录  formlogin 配置认证表单登录-->
         <!--<http-basic></http-basic>-->
         <form-login login-page="/shoplogin.html" default-target-url="/admin/index.html" authentication-failure-url="/shoplogin.html"
                     always-use-default-target="true" ></form-login>
         <!--禁用CSRF-->
         <csrf disabled="true"></csrf>
+
+        <logout logout-url="/logout" logout-success-url="/shoplogin.html"></logout>
 
         <headers>
             <frame-options policy="SAMEORIGIN"></frame-options>
@@ -32,12 +44,20 @@
         <logout logout-success-url="/shoplogin.html"></logout>
     </http>
 
+    <beans:bean class="com.robin.shop.service.UserDetailsServiceImpl" id="userDetailsService">
+        <beans:property name="sellerService" ref="sellerService"></beans:property>
+    </beans:bean>
+    <beans:bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"></beans:bean>
+
     <!--认证-->
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="admin" authorities="ROLE_ADMIN"></user>
-            </user-service>
+        <!--<authentication-provider>-->
+            <!--<user-service>-->
+                <!--<user name="admin" password="admin" authorities="ROLE_ADMIN"></user>-->
+            <!--</user-service>-->
+        <!--</authentication-provider>-->
+        <authentication-provider user-service-ref="userDetailsService">
+            <password-encoder ref="passwordEncoder"></password-encoder>
         </authentication-provider>
     </authentication-manager>
 

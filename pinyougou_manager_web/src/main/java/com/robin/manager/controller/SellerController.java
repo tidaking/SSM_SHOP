@@ -17,7 +17,7 @@ import entity.Result;
  */
 @RestController
 @RequestMapping("/seller")
-public class SellerController {
+public class  SellerController {
 
 	@Reference
 	private SellerService sellerService;
@@ -109,5 +109,6 @@ public class SellerController {
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
 	}
+
 	
 }
