@@ -75,5 +75,54 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 			}			
 		);
 	}
+	
+	$scope.findByParentId = function (id) {
+		itemCatService.findByParentId(id).success(
+			function (response) {
+                $scope.list=response;
+            }
+		)
+		
+		
+	$scope.grade = 1
+    $scope.entity2 = {}
+    $scope.entity3 = {}
+		
+	$scope.setGrade = function (grade) {
+		//if($scope.grade)
+        $scope.grade = grade
+    }
+
+	$scope.selectList = function (entity) {
+
+		if($scope.grade == 1){
+            $scope.entity2 = {}
+            $scope.entity3 = {}
+		}
+
+        if($scope.grade == 2){
+            $scope.entity2 = entity
+            $scope.entity3 = {}
+        }
+
+        if($scope.grade == 3){
+            //$scope.entity2 = {"id":}
+            $scope.entity3 = entity
+        }
+
+        var parentId = 0
+		if($scope.grade != 1){
+            parentId = entity.id
+		}
+		itemCatService.findByParentId(parentId).success(
+			function (response) {
+                $scope.list=response;
+            }
+		)
+    }
+
+
+
+    }
     
 });	
