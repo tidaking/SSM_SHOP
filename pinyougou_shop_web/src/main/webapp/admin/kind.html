@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+  
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    
+    <!-- 富文本编辑器 -->
+	<link rel="stylesheet" href="../plugins/kindeditor/themes/default/default.css" />
+	<script charset="utf-8" src="../plugins/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="../plugins/kindeditor/lang/zh_CN.js"></script>
+
+	<script type="text/javascript"src="../plugins/angularjs/angular.min.js"></script>
+
+    <script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#editor_id', {
+                uploadJson : '/test/image.do',
+                allowFileManager : true,
+                fileManagerJson : '/test/manager.do'
+            });
+        });
+    </script>
+
+</head>
+
+<body class="hold-transition skin-red sidebar-mini">
+
+
+    <textarea id="editor_id" name="content" style="width:700px;height:300px;">
+    &lt;strong&gt;HTML内容&lt;/strong&gt;
+    </textarea>
+
+       
+</body>
+
+</html>

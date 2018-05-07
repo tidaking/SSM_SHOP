@@ -182,7 +182,7 @@ angular.module('pagination', []).directive('tmPagination',[function(){
                 }
 
 
-                var newValue = scope.conf.totalItems + ' ' +  scope.conf.currentPage + ' ' + scope.conf.itemsPerPage;
+                var newValue = scope.conf.totalItems + ' ' + scope.conf.currentPage + ' ' + scope.conf.itemsPerPage;
                 
                 
                 return newValue;
